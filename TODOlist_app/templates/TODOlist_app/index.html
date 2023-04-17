@@ -2,54 +2,74 @@
 
 
 {% block content %}
-<div class="container">
 
-    <div class="row d-flex justify-content-evenly">
-        <div class="col-10 col-md-5 col-lg-4 col-xl-4">
-            <div class="card border shadow p-3 mb-5 bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">ToDO List</h4>
-                    <p class="card-subtitle mb-2 text-muted">Subtitle</p>
+<p>{{ overall_list }}</p>
 
-                    {% if not todos_list %}
-                    <p class="lead">Insert first ToDo record!</p>
-                    {% endif %}
-                </div>
+{% for titles, todos in overall_list.items %}
 
-                {% for item in todos_list %}
-                <ul class="list-group list-group-flush border-0">
-                    <li class="list-group-item lead">
-                        {{item.todo_text}} {{item.order_num}}
-                        <form action="{% url 'TODOlist_app:index' %}" method='POST'>
-                            {% csrf_token %}
-                            <input type="submit" name="{{item.order_num}}" value='↑'
-                                   class="btn btn-outline-primary btn-sm" ;>
-                            <input type="submit" name="{{item.order_num}}" value='↓'
-                                   class="btn btn-outline-primary btn-sm" ;>
-                            <input type="submit" name="{{item.order_num}}" value='☓'
-                                   class="btn btn-outline-danger btn-sm" ;>
-                        </form>
-                    </li>
-                </ul>
-                {% endfor %}
+    <p>{{ titles.title }}</p>
 
-            </div>
-        </div>
-        <div class="col-10 col-md-7 col-lg-5 col-xl-1>">
-            <div class="card border shadow p-3 mb-5 bg-white">
-                <div class="card-body">
-                    <form action="{% url 'TODOlist_app:index' %}" method='POST'>
-                        {% csrf_token %}
-                        {{ form_input.as_p }}
-                        <button type="submit" name="btn_add_entry" class="btn btn-success btn-sm lead")>Add entry</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row justify-content-start">
+    {% for todo in todos %}
+        <p>{{ todo.todo_text }}</p>
+    {% endfor %}
 
-    </div>
-</div>
+{% endfor %}
+
+
+
+<!--<div class="container">-->
+
+<!--    <div class="row d-flex justify-content-evenly">-->
+{% verbatim %}
+<!--        <div class="col-10 col-md-5 col-lg-4 col-xl-4">-->
+<!--            {% for title in overall_list.keys() %}-->
+<!--            <div class="col-auto">-->
+<!--                {% for item in todos_list %}-->
+<!--                <div class="card border shadow p-3 mb-5 bg-white">-->
+<!--                    <div class="card-body">-->
+<!--                        <h4 class="card-title">{{ item.title }}</h4>-->
+<!--                        <p class="card-subtitle mb-2 text-muted">{{ item.date_added }}</p>-->
+<!--                        {% if not todos_list %}-->
+<!--                        <p class="lead">Insert first ToDo record!</p>-->
+<!--                        {% endif %}-->
+<!--                    </div>-->
+<!--                    <ul class="list-group list-group-flush border-0">-->
+<!--                        <li class="list-group-item lead">-->
+<!--                            {{item.todo_text}} {{item.order_num}}-->
+<!--                            <form action="{% url 'TODOlist_app:index' %}" method='POST'>-->
+<!--                                {% csrf_token %}-->
+<!--                                <input type="submit" name="{{item.order_num}}" value='↑'-->
+<!--                                       class="btn btn-outline-primary btn-sm" ;>-->
+<!--                                <input type="submit" name="{{item.order_num}}" value='↓'-->
+<!--                                       class="btn btn-outline-primary btn-sm" ;>-->
+<!--                                <input type="submit" name="{{item.order_num}}" value='☓'-->
+<!--                                       class="btn btn-outline-danger btn-sm" ;>-->
+<!--                            </form>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+
+<!--        <div class="col-10 col-md-7 col-lg-5 col-xl-1>">-->
+<!--            <div class="card border shadow p-3 mb-5 bg-white">-->
+<!--                <div class="card-body">-->
+<!--                    <form action="{% url 'TODOlist_app:index' %}" method='POST'>-->
+<!--                        {% csrf_token %}-->
+<!--                        {{ form_input.as_p }}-->
+<!--                        <button type="submit" name="btn_add_entry" class="btn btn-success btn-sm lead" )>Add entry-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div class="row justify-content-start">-->
+
+<!--    </div>-->
+<!--</div>-->
+{% endverbatim %}
 {% endblock content %}
