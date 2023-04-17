@@ -57,15 +57,15 @@ def index(request):
 
 
 
-            if 'btn_add_entry' in request.POST:
-                # POST submitted. Processing submitted data.
-                form_input = InputForm(request.POST)
-                if form_input.is_valid():
-                    new_entry = TodoList(
-                        todo_text=form_input.cleaned_data['todo_text'],
-                        order_num=getMaxOrderNum(TodoList))
-                    new_entry.save()
-                return redirect('TODOlist_app:index')
+        if 'btn_add_entry' in request.POST.keys():
+            # POST submitted. Processing submitted data.
+            form_input = InputForm(request.POST)
+            if form_input.is_valid():
+                new_entry = TodoList(
+                    todo_text=form_input.cleaned_data['todo_text'],
+                    order_num=getMaxOrderNum(TodoList))
+                new_entry.save()
+            return redirect('TODOlist_app:index')
 
     context = {'todos_list': todos_list, 'form_input': form_input}
 
