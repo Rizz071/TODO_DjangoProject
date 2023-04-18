@@ -14,3 +14,6 @@ class TodoList(models.Model):
     order_num = models.IntegerField()
     date_added = models.DateTimeField(auto_now_add=True)
     title = models.ForeignKey(TodoTitle, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('order_num',)

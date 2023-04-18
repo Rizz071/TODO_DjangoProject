@@ -43,18 +43,18 @@
                         {{todo.todo_text}} {{todo.order_num}}
                         <form action="{% url 'TODOlist_app:index' %}" method='POST'>
                             {% csrf_token %}
-                            <input type="submit" name="{{ titles.title }},{{todo.order_num}}" value='↑'
+                            <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↑'
                                    class="btn btn-outline-primary btn-sm" ;>
-                            <input type="submit" name="{{ titles.title }},{{todo.order_num}}" value='↓'
+                            <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↓'
                                    class="btn btn-outline-primary btn-sm" ;>
-                            <input type="submit" name="{{ titles.title }},{{todo.order_num}}" value='☓'
+                            <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='☓'
                                    class="btn btn-outline-danger btn-sm" ;>
                         </form>
                     </li>
                 </ul>
                 {% endfor %}
 
-                <!--        Input new todo_item card-->
+                <!--Input new todo_item card-->
                 <form action="{% url 'TODOlist_app:index' %}" method='POST'>
                     {% csrf_token %}
                     {{ form_input.as_p }}
