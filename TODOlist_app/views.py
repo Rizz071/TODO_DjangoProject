@@ -71,7 +71,6 @@ def index(request):
                 print("Deleting todo string: ", del_entry.todo_text)
                 try:
                     del_entry.delete()
-
                 except:
                     print('Database writing error!')
                 return redirect('TODOlist_app:index')
