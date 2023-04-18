@@ -36,31 +36,32 @@
                     {% endif %}
 
 
-                </div>
-                {% for todo in todos %}
-                <ul class="list-group list-group-flush border-0">
-                    <li class="list-group-item lead">
-                        {{todo.todo_text}} {{todo.order_num}}
-                        <form action="{% url 'TODOlist_app:index' %}" method='POST'>
-                            {% csrf_token %}
-                            <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↑'
-                                   class="btn btn-outline-primary btn-sm" ;>
-                            <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↓'
-                                   class="btn btn-outline-primary btn-sm" ;>
-                            <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='☓'
-                                   class="btn btn-outline-danger btn-sm" ;>
-                        </form>
-                    </li>
-                </ul>
-                {% endfor %}
+                    {% for todo in todos %}
+                    <ul class="list-group list-group-flush border-0">
+                        <li class="list-group-item lead">
+                            {{todo.order_num}}. {{todo.todo_text}}
+                            <form action="{% url 'TODOlist_app:index' %}" method='POST'>
+                                {% csrf_token %}
+                                <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↑'
+                                       class="btn btn-outline-primary btn-sm" ;>
+                                <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↓'
+                                       class="btn btn-outline-primary btn-sm" ;>
+                                <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='☓'
+                                       class="btn btn-outline-danger btn-sm" ;>
+                            </form>
+                        </li>
+                    </ul>
+                    {% endfor %}
 
-                <!--Input new todo_item card-->
-                <form action="{% url 'TODOlist_app:index' %}" method='POST'>
-                    {% csrf_token %}
-                    {{ form_input.as_p }}
-                    <button type="submit" name="btn_add_entry" class="btn btn-success btn-sm lead">Add entry
-                    </button>
-                </form>
+                    <!--Input new todo_item card-->
+                    <form action="{% url 'TODOlist_app:index' %}" method='POST'>
+                        {% csrf_token %}
+                        {{ form_input.as_p }}
+                        <button type="submit" name="btn_add_entry,{{titles.title}}" class="btn btn-success btn-sm lead">
+                            Add
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 

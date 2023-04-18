@@ -11,5 +11,5 @@ class InputForm(forms.ModelForm):
         labels = {'todo_text': ''}
 
         widgets = {
-            "todo_text": Textarea(attrs={"rows": 2, "class": "form-control"}),
+            "todo_text": Textarea(attrs={"rows": 1, "class": "form-control"}),
         }
