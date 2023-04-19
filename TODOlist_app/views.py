@@ -24,7 +24,6 @@ def index(request):
 
         if '↑' in action or '↓' in action or '☓' in action:
 
-
             title_id = query_dict_to_list.split(",")[0]
 
             work_entry_num = int(query_dict_to_list.split(",")[1])
@@ -88,7 +87,7 @@ def index(request):
             if form_input.is_valid():
                 new_entry = TodoList(
                     todo_text=form_input.cleaned_data['todo_text'],
-                    order_num=getMaxOrderNum(TodoList),
+                    order_num=getMaxOrderNum(TodoList, title_object),
                     title=title_object)
                 new_entry.save()
             return redirect('TODOlist_app:index')
