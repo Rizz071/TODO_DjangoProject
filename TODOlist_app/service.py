@@ -1,6 +1,6 @@
 def getMaxOrderNum(TodoDB, TitleDB):
     # определяется запись в БД с максимальным значением поля order_num (поле для сортировки)
-    # N = 0  # Инициализация порядковой переменной, если БД пуста
+    N = 0  # Инициализация порядковой переменной, если БД пуста
 
     order_nums = []
     for item in TodoDB.objects.filter(title=TitleDB):

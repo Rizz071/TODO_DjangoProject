@@ -1,0 +1,26 @@
+{% extends 'TODOlist_app/base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row d-flex">
+        <div class="col-3">
+            <div class="card border shadow p-3 mb-5 bg-white">
+                <div class="card-body">
+                    <h4 class="card-title">Input new TODO list title</h4>
+                    <form action="{% url 'TODOlist_app:add_list' %}" method='POST'>
+                        {% csrf_token %}
+                        {{ form_addListForm.as_p }}
+                        <button type="submit" name="btn_add_entry" class="btn btn-success btn-sm lead">
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
