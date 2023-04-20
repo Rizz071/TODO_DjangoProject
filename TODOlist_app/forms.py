@@ -28,3 +28,13 @@ class addListForm(forms.ModelForm):
 
 class delListForm(forms.Form):
     pass
+
+class editTitleForm(forms.ModelForm):
+    class Meta:
+        model = TodoTitle
+        fields = ['title']
+        labels = {'title': ''}
+
+        widgets = {
+            "title": Textarea(attrs={"rows": 1, "class": "form-control"}),
+        }

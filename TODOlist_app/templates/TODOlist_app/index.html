@@ -21,25 +21,33 @@
 
 <div class="container">
 
-    <div class="row d-flex">
+    <div class="row justify-content-center">
 
 
         {% for titles, todos in overall_list.items %}
         <!--Individual TODO_item card-->
-        <div class="col-3">
-            <div class="card border shadow p-3 mb-5 bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">{{ titles.title }}</h4>
-                    <p class="card-subtitle mb-2 text-muted">{{ item.date_added }}</p>
-                    {% if not todos_list %}
-                    <p class="lead">Insert first ToDo record!</p>
+        <div class="col-8 col-md-auto">
+            <div class="card shadow p-0 mb-5 bg-white">
+                <div class="card-body mb-0 p-0">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            {{ titles.title }}
+                            <a class="btn btn-outline-primary btn-sm list-inline-item" href="{% url 'TODOlist_app:edit_title' titles.id %}">Edit</a>
+                        </h5>
+
+                        <p class="card-subtitle mb-2 text-muted"><small>{{ titles.date_added }}</small></p>
+                    </div>
+
+
+                    {% if not todos %}
+                    <p class="card-text mb-1 mx-3">Insert first TODO record!</p>
                     {% endif %}
-
-
                     {% for todo in todos %}
                     <ul class="list-group list-group-flush border-0">
-                        <li class="list-group-item lead">
-                            {{todo.order_num}}. {{todo.todo_text}}
+                        <li class="list-group-item">
+                            <p class="card-text mb-1 fs-5">{{todo.order_num}}. {{todo.todo_text}}</p>
+                            <p class="card-subtitle mb-1 text-muted"><small>{{ todo.date_added }}</small></p>
+
                             <form action="{% url 'TODOlist_app:index' %}" method='POST'>
                                 {% csrf_token %}
                                 <input type="submit" name="{{ titles.id }},{{todo.order_num}}" value='↑'
@@ -54,13 +62,15 @@
                     {% endfor %}
 
                     <!--Input new todo_item card-->
-                    <form action="{% url 'TODOlist_app:index' %}" method='POST'>
-                        {% csrf_token %}
-                        {{ form_input.as_p }}
-                        <button type="submit" name="btn_add_entry,{{titles.title}}" class="btn btn-success btn-sm lead">
-                            Add
-                        </button>
-                    </form>
+                    <div class="mx-3">
+                        <form action="{% url 'TODOlist_app:index' %}" method='POST'>
+                            {% csrf_token %}
+                            {{ form_input.as_p }}
+                            <button type="submit" name="btn_add_entry,{{titles.title}}"
+                                    class="btn btn-success btn-sm">Add
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
