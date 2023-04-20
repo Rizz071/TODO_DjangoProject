@@ -17,3 +17,6 @@ class TodoList(models.Model):
 
     class Meta:
         ordering = ('order_num',)
+
+
+

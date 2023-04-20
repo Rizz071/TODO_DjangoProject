@@ -109,16 +109,11 @@ def add_list(request):
             print('Database writing error!')
         return redirect('TODOlist_app:index')
 
-
-
     context = {'form_addListForm': form_addListForm}
     return render(request, 'TODOlist_app/add_list.html', context)
 
 
 def del_list(request):
-
-
-
     if request.method == 'GET':
         form_delListForm = delListForm()
 

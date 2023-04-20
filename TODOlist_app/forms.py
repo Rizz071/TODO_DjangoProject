@@ -25,5 +25,6 @@ class addListForm(forms.ModelForm):
             "title": Textarea(attrs={"rows": 1, "class": "form-control"}),
         }
 
+
 class delListForm(forms.Form):
     pass
