@@ -10,11 +10,11 @@
             <div class="card border shadow p-3 mb-5 bg-white">
                 <div class="card-body">
                     <h4 class="card-title">New TODO list</h4>
-                    <form action="{% url 'TODOlist_app:add_list' %}" method='POST'>
+                    <form action="{% url 'TODOlist_app:edit_title' title_id %}" method='POST'>
                         {% csrf_token %}
-                        {{ form_addListForm.as_p }}
-                        <button type="submit" name="btn_add_entry" class="btn btn-success btn-sm lead">
-                            Add
+                        {{ form_editTitle.as_p }}
+                        <button type="submit" name="btn_edit_title_submit" class="btn btn-success btn-sm">
+                            Save
                         </button>
                     </form>
                 </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import InputForm, addListForm, delListForm
+from .forms import InputForm, addListForm, delListForm, editTitleForm
 from .models import TodoList, TodoTitle
 from .service import getMaxOrderNum
 
@@ -129,3 +129,24 @@ def del_list(request):
 
     context = {'form_delListForm': form_delListForm, 'titles': TodoTitle.objects.all()}
     return render(request, 'TODOlist_app/del_list.html', context)
+
+
+def edit_title(request, title_id):
+    old_title = TodoTitle.objects.get(id=title_id)
+
+    if request.method == 'GET':
+        form_editTitle = editTitleForm(instance=old_title)
+
+    if request.method == 'POST':
+        form_editTitle = editTitleForm(data=request.POST, instance=old_title)
+        if form_editTitle.is_valid():
+
+            try:
+                # TodoTitle.objects.get(title=title_name_to_del).delete()
+                form_editTitle.save()
+            except:
+                print('Database writing error!')
+            return redirect('TODOlist_app:index')
+
+    context = {'form_editTitle': form_editTitle, 'title_id': title_id}
+    return render(request, 'TODOlist_app/edit_title.html', context)
