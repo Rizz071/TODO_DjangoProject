@@ -5,10 +5,11 @@ def getMaxOrderNum(TodoDB, TitleDB):
     order_nums = []
     for item in TodoDB.objects.filter(title=TitleDB):
         order_nums.append(item.order_num)
-        N = max(order_nums) + 1
+        N_max = max(order_nums)
+        N_min = min(order_nums)
 
-    print(f'Next order_num will be: {N}')
-    return N
+    print(f'Next order_num will be: {N_max+1}')
+    return N_min, N_max
 
 # def get_order_num(dict):
 #     for key, value in dict.items():

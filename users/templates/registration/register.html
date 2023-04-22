@@ -1,0 +1,31 @@
+{% extends 'TODOlist_app/base.html' %}
+{% load bootstrap5 %}
+{% load socialaccount %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <form class="form" method='POST' action="{% url 'users:register' %}">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+
+                {% buttons %}
+                <button name="submit" class="btn btn-primary">Register</button>
+                {% endbuttons %}
+                <input type="hidden" name="next" value="{% url 'TODOlist_app:index' %}"/>
+            </form>
+
+            <a class="btn btn-outline-danger" href="{% provider_login_url 'google' %}?next=/">
+                <i class="fab fa-google"></i>
+                Login with Google
+            </a>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

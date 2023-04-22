@@ -35,7 +35,10 @@ def index(request):
             work_entry = work_title.todolist_set.get(order_num=work_entry_num)
             print("Work todo object =", work_entry)
 
-            if action == '↑' and work_entry_num != 0:
+            # Searching for minimum and maximum order_num in a working TODOs list
+            N_min, N_max = getMaxOrderNum(TodoList, work_title)
+
+            if action == '↑' and work_entry_num != N_min:
                 entry_to_up = work_title.todolist_set.get(order_num=work_entry_num)
                 entry_to_down = work_title.todolist_set.get(order_num=work_entry_num - 1)
                 while not entry_to_down:
@@ -50,7 +53,8 @@ def index(request):
                     print('Database writing error!')
                 return redirect('TODOlist_app:index')
 
-            if action == '↓' and work_entry_num != work_title.todolist_set.all().count() - 1:
+            # if action == '↓' and work_entry_num != work_title.todolist_set.all().count() - 1:
+            if action == '↓' and work_entry_num != N_max:
                 entry_to_down = work_title.todolist_set.get(order_num=work_entry_num)
                 entry_to_up = work_title.todolist_set.get(order_num=work_entry_num + 1)
                 while not entry_to_up:
@@ -83,11 +87,13 @@ def index(request):
             title_object = TodoTitle.objects.get(title=title_name)
             print(title_object.id)
 
+            N_min, N_max = getMaxOrderNum(TodoList, title_object)
+
             form_input = InputForm(request.POST)
             if form_input.is_valid():
                 new_entry = TodoList(
                     todo_text=form_input.cleaned_data['todo_text'],
-                    order_num=getMaxOrderNum(TodoList, title_object),
+                    order_num=N_max + 1,
                     title=title_object)
                 new_entry.save()
             return redirect('TODOlist_app:index')

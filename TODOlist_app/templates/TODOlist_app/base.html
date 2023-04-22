@@ -9,7 +9,9 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% load static %}
+    {% load socialaccount %}
     <link rel="stylesheet" href="{% static 'TODOlist_app/style.css' %}">
+    <script src="https://kit.fontawesome.com/cbd4c74f94.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -39,8 +41,16 @@
                 </button>
             </div>
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+
+                {% if user.is_authenticated %}
+                    Welcome, You are logged in as <span class="text-success">{{ user.username }}</span>
+                        <a class="btn btn-outline-light me-2" href="{% url 'users:logout' %}">Logout</a>
+
+                {% else %}
+                    <a class="btn btn-outline-light me-2" href="{% url 'users:login' %}">Login</a>
+                    <a class="btn btn-warning" href="{% url 'users:register' %}">Sign-up</a>
+                {% endif %}
+
             </div>
         </div>
     </div>
