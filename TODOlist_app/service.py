@@ -8,6 +8,10 @@ def getMaxOrderNum(TodoDB, TitleDB):
         N_max = max(order_nums)
         N_min = min(order_nums)
 
+    if not TodoDB.objects.filter(title=TitleDB):
+        N_max = 0
+        N_min = 0
+
     print(f'Next order_num will be: {N_max+1}')
     return N_min, N_max
 
